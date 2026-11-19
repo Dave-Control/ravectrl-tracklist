@@ -1,0 +1,42 @@
+name: Registrar canciones
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"   # cada 10 minutos
+  workflow_dispatch:          # permite correrlo a mano con un boton
+
+permissions:
+  contents: write
+
+concurrency:
+  group: registrar
+  cancel-in-progress: false
+
+jobs:
+  registrar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar requests
+        run: pip install requests
+
+      - name: Consultar y registrar
+        run: python registrar.py
+
+      - name: Guardar cambios
+        run: |
+          git config user.name "ravectrl-bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add canciones.csv
+          if git diff --cached --quiet; then
+            echo "Nada nuevo que guardar."
+          else
+            git commit -m "Nuevas canciones $(TZ=America/Mexico_City date '+%Y-%m-%d %H:%M')"
+            git pull --rebase
+            git push
+          fi
