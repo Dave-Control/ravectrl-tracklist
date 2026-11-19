@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tracklist RAVE//CTRL</title>
+<meta name="description" content="Historial de canciones que han sonado en RAVE//CTRL (proyecto de un radioescucha).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0b0c; --panel:#141416; --line:#26262a; --text:#f2f2f2;
+    --muted:#9a9aa2; --accent:#b6f222; --accent-ink:#0b0b0c;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);
+       font-family:"Space Grotesk",system-ui,sans-serif}
+  .wrap{max-width:960px;margin:0 auto;padding:32px 16px 64px}
+  header h1{font-size:clamp(28px,6vw,44px);margin:0;letter-spacing:-.02em}
+  header h1 span{color:var(--accent)}
+  header p{color:var(--muted);margin:8px 0 0}
+  .mono{font-family:"JetBrains Mono",monospace}
+  .now{margin-top:24px;background:var(--accent);color:var(--accent-ink);
+       border-radius:16px;padding:16px 20px}
+  .now small{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.12em}
+  .now b{display:block;font-size:22px;margin-top:4px}
+  .controls{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0 12px}
+  input,select{background:var(--panel);color:var(--text);border:1px solid var(--line);
+       border-radius:10px;padding:10px 12px;font:inherit;font-size:15px}
+  input[type=search]{flex:1 1 240px}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0 20px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+  .stat small{color:var(--muted);font-size:12px}
+  .stat b{display:block;font-size:20px;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .day{margin-top:22px}
+  .day h2{font-family:"JetBrains Mono",monospace;font-size:13px;letter-spacing:.12em;
+          color:var(--accent);text-transform:uppercase;margin:0 0 8px}
+  ul{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  li{display:flex;gap:14px;align-items:center;padding:10px 14px;border-top:1px solid var(--line);background:var(--panel)}
+  li:first-child{border-top:0}
+  .t{font-family:"JetBrains Mono",monospace;color:var(--muted);font-size:13px;min-width:58px}
+  .s{flex:1;min-width:0}
+  .s b{display:block;font-weight:600;overflow-wrap:anywhere}
+  .s span{color:var(--muted);font-size:14px}
+  .links a{color:var(--muted);text-decoration:none;font-size:12px;border:1px solid var(--line);
+           border-radius:999px;padding:3px 8px;margin-left:4px;white-space:nowrap}
+  .links a:hover{color:var(--accent-ink);background:var(--accent);border-color:var(--accent)}
+  .empty{color:var(--muted);padding:30px 0;text-align:center}
+  footer{margin-top:40px;color:var(--muted);font-size:13px}
+  footer a{color:var(--accent)}
+  @media (max-width:560px){ .links{display:none} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Tracklist <span>RAVE//CTRL</span></h1>
+    <p>Todo lo que ha sonado en la radio, registrado automáticamente.</p>
+  </header>
+
+  <div class="now" id="ultima" hidden>
+    <small>ÚLTIMA REGISTRADA</small>
+    <b id="ultimaTxt"></b>
+  </div>
+
+  <div class="controls">
+    <input type="search" id="q" placeholder="Buscar artista o canción…">
+    <select id="dia"><option value="">Todos los días</option></select>
+  </div>
+
+  <div class="stats" id="stats"></div>
+  <div id="lista"><p class="empty">Cargando…</p></div>
+
+  <footer>
+    Proyecto hecho por un radioescucha. Escucha en vivo en
+    <a href="https://ravecontrol.com" target="_blank" rel="noopener">ravecontrol.com</a>.
+  </footer>
+</div>
+
+<script>
+function parseCSV(txt){
+  const rows=[]; let row=[], f="", q=false;
+  for(let i=0;i<txt.length;i++){
+    const c=txt[i];
+    if(q){ if(c=='"'){ if(txt[i+1]=='"'){f+='"';i++} else q=false } else f+=c }
+    else if(c=='"') q=true;
+    else if(c==','){ row.push(f); f="" }
+    else if(c=='\n'||c=='\r'){ if(c=='\r'&&txt[i+1]=='\n') i++; row.push(f); rows.push(row); row=[]; f="" }
+    else f+=c;
+  }
+  if(f||row.length){ row.push(f); rows.push(row) }
+  const [h,...d]=rows;
+  return d.filter(r=>r.length>=h.length).map(r=>Object.fromEntries(h.map((k,i)=>[k,r[i]])));
+}
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fmtDia=f=>{ const [y,m,d]=f.split("-").map(Number);
+  return new Date(y,m-1,d).toLocaleDateString("es-MX",{weekday:"long",day:"numeric",month:"long",year:"numeric"}) };
+const top=(arr,key)=>{ const c={}; arr.forEach(x=>c[x[key]]=(c[x[key]]||0)+1);
+  return Object.entries(c).sort((a,b)=>b[1]-a[1])[0] };
+
+let todas=[];
+fetch("canciones.csv?"+Date.now()).then(r=>r.text()).then(t=>{
+  todas=parseCSV(t).sort((a,b)=>b.ts-a.ts);
+  const dias=[...new Set(todas.map(x=>x.fecha))];
+  const sel=document.getElementById("dia");
+  dias.forEach(d=>sel.insertAdjacentHTML("beforeend",`<option value="${d}">${fmtDia(d)}</option>`));
+  if(todas[0]){
+    document.getElementById("ultima").hidden=false;
+    document.getElementById("ultimaTxt").textContent=`${todas[0].artista} — ${todas[0].titulo}  ·  ${todas[0].hora.slice(0,5)}`;
+  }
+  pintar();
+}).catch(()=>{ document.getElementById("lista").innerHTML='<p class="empty">No se pudo cargar el historial.</p>' });
+
+function pintar(){
+  const q=document.getElementById("q").value.trim().toLowerCase();
+  const dia=document.getElementById("dia").value;
+  const vis=todas.filter(x=>(!dia||x.fecha==dia)&&(!q||(x.artista+" "+x.titulo).toLowerCase().includes(q)));
+
+  const ta=top(vis,"artista");
+  document.getElementById("stats").innerHTML=`
+    <div class="stat"><small>Canciones</small><b>${vis.length}</b></div>
+    <div class="stat"><small>Artistas distintos</small><b>${new Set(vis.map(x=>x.artista)).size}</b></div>
+    <div class="stat"><small>Artista más tocado</small><b title="${ta?esc(ta[0]):""}">${ta?esc(ta[0])+" ("+ta[1]+")":"—"}</b></div>`;
+
+  if(!vis.length){ document.getElementById("lista").innerHTML='<p class="empty">Sin resultados.</p>'; return }
+  const porDia={}; vis.forEach(x=>(porDia[x.fecha]=porDia[x.fecha]||[]).push(x));
+  document.getElementById("lista").innerHTML=Object.entries(porDia).map(([d,xs])=>`
+    <section class="day"><h2>${fmtDia(d)} · ${xs.length}</h2><ul>${xs.map(x=>{
+      const s=encodeURIComponent(x.artista+" "+x.titulo);
+      return `<li><span class="t">${x.hora.slice(0,5)}</span>
+        <span class="s"><b>${esc(x.titulo)}</b><span>${esc(x.artista)}</span></span>
+        <span class="links"><a href="https://open.spotify.com/search/${s}" target="_blank" rel="noopener">Spotify</a><a href="https://www.youtube.com/results?search_query=${s}" target="_blank" rel="noopener">YouTube</a></span></li>`}).join("")}
+    </ul></section>`).join("");
+}
+document.getElementById("q").addEventListener("input",pintar);
+document.getElementById("dia").addEventListener("change",pintar);
+</script>
+</body>
+</html>
