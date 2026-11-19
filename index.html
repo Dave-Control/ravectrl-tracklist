@@ -95,7 +95,7 @@ function parseCSV(txt){
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const fmtDia=f=>{ const [y,m,d]=f.split("-").map(Number);
   return new Date(y,m-1,d).toLocaleDateString("es-MX",{weekday:"long",day:"numeric",month:"long",year:"numeric"}) };
-const top=(arr,key)=>{ const c={}; arr.forEach(x=>c[x[key]]=(c[x[key]]||0)+1);
+const masTocado=(arr,key)=>{ const c={}; arr.forEach(x=>c[x[key]]=(c[x[key]]||0)+1);
   return Object.entries(c).sort((a,b)=>b[1]-a[1])[0] };
 
 let todas=[];
@@ -116,7 +116,7 @@ function pintar(){
   const dia=document.getElementById("dia").value;
   const vis=todas.filter(x=>(!dia||x.fecha==dia)&&(!q||(x.artista+" "+x.titulo).toLowerCase().includes(q)));
 
-  const ta=top(vis,"artista");
+  const ta=masTocado(vis,"artista");
   document.getElementById("stats").innerHTML=`
     <div class="stat"><small>Canciones</small><b>${vis.length}</b></div>
     <div class="stat"><small>Artistas distintos</small><b>${new Set(vis.map(x=>x.artista)).size}</b></div>
