@@ -50,9 +50,13 @@ def limpiar(titulo):
 
 def main():
     vistos = set()
+    ultima = None  # ultima cancion guardada, para evitar repeticiones
     if os.path.exists(ARCHIVO):
         with open(ARCHIVO, encoding="utf-8") as f:
-            vistos = {fila["ts"] for fila in csv.DictReader(f)}
+            filas = list(csv.DictReader(f))
+        vistos = {fila["ts"] for fila in filas}
+        if filas:
+            ultima = filas[-1]
 
     r = requests.get(URL, headers=HEADERS, timeout=30)
     r.raise_for_status()
@@ -71,6 +75,19 @@ def main():
             "ts": ts,
         })
     nuevos.sort(key=lambda x: int(x["ts"]))
+
+    # El sistema de la radio a veces reporta la misma cancion dos veces
+    # con segundos de diferencia: si se repite en menos de 2 minutos, se ignora.
+    filtrados = []
+    for t in nuevos:
+        if (ultima
+                and t["artista"] == ultima["artista"]
+                and t["titulo"] == ultima["titulo"]
+                and int(t["ts"]) - int(ultima["ts"]) < 120_000):
+            continue
+        filtrados.append(t)
+        ultima = t
+    nuevos = filtrados
 
     if not nuevos:
         print("Sin canciones nuevas.")
