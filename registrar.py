@@ -1,7 +1,9 @@
 """
 Registro de canciones de RAVE//CTRL - version para GitHub Actions.
-Se ejecuta una vez por corrida (GitHub lo lanza cada 10 minutos)
-y agrega a canciones.csv las canciones nuevas.
+Se ejecuta una vez por corrida y mantiene canciones.csv limpio:
+- agrega las canciones nuevas
+- quita repeticiones (misma cancion en menos de 10 minutos)
+- quita las cortinillas/frases de la estacion
 """
 
 import csv
@@ -15,6 +17,8 @@ URL = ("https://ravecontrol.com/_serverFn/"
        "50a4176b5a427aacb0a9bc190608058a257fb9339a105927aeb03be4dfac5193")
 ARCHIVO = "canciones.csv"
 ZONA = ZoneInfo("America/Mexico_City")  # los servidores de GitHub usan hora UTC
+VENTANA_MS = 10 * 60 * 1000              # repeticiones dentro de 10 minutos se ignoran
+CAMPOS = ["fecha", "hora", "artista", "titulo", "ts"]
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (registro personal de canciones)",
@@ -48,15 +52,38 @@ def limpiar(titulo):
     return titulo
 
 
+def es_cortinilla(t):
+    """Frases e identificaciones de la estacion, no son canciones."""
+    texto = f'{t["artista"]} {t["titulo"]}'.lower()
+    return "rave ctrl" in texto or "rave//ctrl" in texto or t["artista"].lower().startswith("frase")
+
+
+def clave(t):
+    """Identifica la cancion aunque artista y titulo vengan invertidos."""
+    return frozenset([t["artista"].lower(), t["titulo"].lower()])
+
+
+def depurar(filas):
+    filas = sorted(filas, key=lambda x: int(x["ts"]))
+    limpias, ultima_vez = [], {}
+    for t in filas:
+        if es_cortinilla(t):
+            continue
+        k, ts = clave(t), int(t["ts"])
+        if k in ultima_vez and ts - ultima_vez[k] < VENTANA_MS:
+            ultima_vez[k] = ts  # sigue "sonando": extiende la ventana
+            continue
+        ultima_vez[k] = ts
+        limpias.append(t)
+    return limpias
+
+
 def main():
-    vistos = set()
-    ultima = None  # ultima cancion guardada, para evitar repeticiones
+    filas = []
     if os.path.exists(ARCHIVO):
         with open(ARCHIVO, encoding="utf-8") as f:
             filas = list(csv.DictReader(f))
-        vistos = {fila["ts"] for fila in filas}
-        if filas:
-            ultima = filas[-1]
+    vistos = {fila["ts"] for fila in filas}
 
     r = requests.get(URL, headers=HEADERS, timeout=30)
     r.raise_for_status()
@@ -74,33 +101,16 @@ def main():
             "titulo": limpiar(t.get("titulo")),
             "ts": ts,
         })
-    nuevos.sort(key=lambda x: int(x["ts"]))
 
-    # El sistema de la radio a veces reporta la misma cancion dos veces
-    # con segundos de diferencia: si se repite en menos de 2 minutos, se ignora.
-    filtrados = []
-    for t in nuevos:
-        if (ultima
-                and t["artista"] == ultima["artista"]
-                and t["titulo"] == ultima["titulo"]
-                and int(t["ts"]) - int(ultima["ts"]) < 120_000):
-            continue
-        filtrados.append(t)
-        ultima = t
-    nuevos = filtrados
+    antes = len(filas)
+    resultado = depurar(filas + nuevos)
 
-    if not nuevos:
-        print("Sin canciones nuevas.")
-        return
+    with open(ARCHIVO, "w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=CAMPOS)
+        w.writeheader()
+        w.writerows(resultado)
 
-    existe = os.path.exists(ARCHIVO)
-    with open(ARCHIVO, "a", newline="", encoding="utf-8") as f:
-        w = csv.DictWriter(f, fieldnames=["fecha", "hora", "artista", "titulo", "ts"])
-        if not existe:
-            w.writeheader()
-        w.writerows(nuevos)
-    for t in nuevos:
-        print(f'{t["fecha"]} {t["hora"]}  {t["artista"]} - {t["titulo"]}')
+    print(f"Antes: {antes} filas | nuevas consultadas: {len(nuevos)} | ahora: {len(resultado)}")
 
 
 if __name__ == "__main__":
