@@ -53,9 +53,24 @@ def limpiar(titulo):
 
 
 def es_cortinilla(t):
-    """Frases e identificaciones de la estacion, no son canciones."""
-    texto = f'{t["artista"]} {t["titulo"]}'.lower()
-    return "rave ctrl" in texto or "rave//ctrl" in texto or t["artista"].lower().startswith("frase")
+    """Frases, identificaciones, huecos vacios y avisos del sistema: no son canciones."""
+    a, ti = t["artista"].strip().lower(), t["titulo"].strip().lower()
+    texto = f"{a} {ti}"
+    if ti in ("", "-") and a in ("", "-"):
+        return True                                   # registro vacio
+    if a == "libretime" or ti == "offline":
+        return True                                   # aviso del sistema de la radio
+    if a.startswith("frase") or ti.startswith("frase"):
+        return True                                   # cortinillas "FRASE ..."
+    return any(x in texto for x in ("rave ctrl", "rave//ctrl", "rave-ctrl", "ravectrl"))
+
+
+def quitar_artista_repetido(t):
+    """'Claptone - Beautiful Times' en el titulo -> 'Beautiful Times'."""
+    pref = t["artista"].strip() + " - "
+    if t["artista"].strip() and t["titulo"].lower().startswith(pref.lower()):
+        t["titulo"] = t["titulo"][len(pref):].strip()
+    return t
 
 
 def clave(t):
@@ -69,7 +84,11 @@ def depurar(filas):
     for t in filas:
         if es_cortinilla(t):
             continue
+        t = quitar_artista_repetido(t)
         k, ts = clave(t), int(t["ts"])
+        if limpias and clave(limpias[-1]) == k:
+            ultima_vez[k] = ts  # igual a la anterior (p. ej. programa que se re-anuncia): se omite
+            continue
         if k in ultima_vez and ts - ultima_vez[k] < VENTANA_MS:
             ultima_vez[k] = ts  # sigue "sonando": extiende la ventana
             continue
