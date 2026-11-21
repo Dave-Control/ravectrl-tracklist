@@ -37,7 +37,6 @@ fecha,hora,artista,titulo,ts
 2026-11-19,02:03:50,The Buffalo Bunch,Music Box,1795075430266
 2026-11-19,02:56:14,The Prodigy,Breathe,1795078574292
 2026-11-19,02:57:59,Regard & RAYE,Secrets (Extended Mix) edmlake.com,1795078679009
-2026-11-19,02:58:36,LibreTime,offline,1795078716996
 2026-11-19,03:01:49,Luca Debonaire,Wanna Say Yes (Club Mix),1795078909092
 2026-11-19,03:07:16,"Elley Duhé, Meduza, FAST BOY",Bad Memories (David Guetta Extended Remix),1795079236732
 2026-11-19,03:48:13,W&W x Vini Vici,Chakra (Original mix),1795081693484
@@ -99,7 +98,6 @@ fecha,hora,artista,titulo,ts
 2026-11-19,14:31:26,Luca Debonaire,Walking on Clouds (Croatia Squad Remix,1795120286599
 2026-11-19,14:36:43,Solarstone & JES,Like A Waterfall,1795120603935
 2026-11-19,14:59:22,Luminary,My World (Original Mix),1795121962656
-2026-11-19,14:59:47,,-,1795121987561
 2026-11-19,15:00:09,"Justice ft Tame Impala, SZA, King Gizzard & the Lizard Wizard",Flower In A Hurricane (Original Mix),1795122009260
 2026-11-19,15:23:02,Daft Punk,Around the World (Original Mix),1795123382556
 2026-11-19,16:03:21,"The Notorious B.I.G., Bone Thugs-n-Harmony",Notorious Thugs (feat. Bone Thugs-n-Harmony) (Solomun Remix; Extended),1795125801612
@@ -112,13 +110,9 @@ fecha,hora,artista,titulo,ts
 2026-11-19,17:55:24,"Carbajal, Calego",Canela (Original Mix),1795132524698
 2026-11-19,17:59:48,Jamiroquai,Cosmic Girl (Tom Belton Remix),1795132788559
 2026-11-19,18:00:00,Club Tesoro,007,1795132800204
-2026-11-19,19:59:45,LibreTime,offline,1795139985719
 2026-11-19,20:00:00,The Prodigy,Breathe,1795140000116
 2026-11-19,20:00:00,Negro Salcedo,Dense Con Salcedo - 008,1795140000168
-2026-11-19,20:58:54,LibreTime,offline,1795143534791
-2026-11-19,21:00:00,Negro Salcedo,Dense Con Salcedo - 008,1795143600073
 2026-11-19,21:00:00,"Justice ft Tame Impala, SZA, King Gizzard & the Lizard Wizard",Flower In A Hurricane (Original Mix),1795143600113
-2026-11-19,21:02:27,,-,1795143747192
 2026-11-19,21:02:45,Get Up & Dance,Monsieur Mellow,1795143765199
 2026-11-19,21:07:08,Comencemos (Let's Start),Jungle Fire,1795144028312
 2026-11-19,21:09:38,Comencemos (Let's Start),Never Dull,1795144178284
@@ -235,7 +229,6 @@ fecha,hora,artista,titulo,ts
 2026-11-20,06:49:38,Deepest Blue,Give It Away,1795178978075
 2026-11-20,06:53:15,Mark & Stevens,Freak Emotion (Sonny Fodera Remix),1795179195778
 2026-11-20,06:59:56,A'Studio Feat. Polina,S.O.S. (Skylark Vocal Mix),1795179596491
-2026-11-20,07:01:40,,-,1795179700434
 2026-11-20,07:06:54,Alaia & Gallo,Get Some Lovin' (Extended Mix),1795180014374
 2026-11-20,07:12:52,"Hellmate, Santiago & Carlitos, Chantal Lewis",Brown,1795180372093
 2026-11-20,07:17:12,"Jewel Kid, James Hurr",Shake It (Extended Mix),1795180632117
@@ -268,10 +261,10 @@ fecha,hora,artista,titulo,ts
 2026-11-20,10:59:26,Purple Disco Machine,Body Funk (Original Mix),1795193966983
 2026-11-20,11:06:53,Chicago,Street Player (ESSED Remix),1795194413164
 2026-11-20,11:13:22,"Eats Everything, Love Revolution, History Of Rave",Give It To Me Baby (Extended Mix),1795194802396
-2026-11-20,11:20:06,Soul Central,Soul Central - Strings Of Life  Un Amore Supremo (Bart Skils & Weska Remix),1795195206259
-2026-11-20,11:26:11,"Claptone, Miramar & Kurtis Wells","Claptone, Miramar & Kurtis Wells - Beautiful Times (Extended Mix)",1795195571989
+2026-11-20,11:20:06,Soul Central,Strings Of Life  Un Amore Supremo (Bart Skils & Weska Remix),1795195206259
+2026-11-20,11:26:11,"Claptone, Miramar & Kurtis Wells",Beautiful Times (Extended Mix),1795195571989
 2026-11-20,11:41:49,Tiësto & Brieanna Grace,Beautiful Places (Extended Mix),1795196509247
-2026-11-20,11:45:50,Kaskade & Brieanna Grace,Kaskade & Brieanna Grace - Stay For Love (Extended Mix),1795196750084
+2026-11-20,11:45:50,Kaskade & Brieanna Grace,Stay For Love (Extended Mix),1795196750084
 2026-11-20,11:51:14,Lost Frequencies,Don't Forget (About Me) (Extended Version),1795197074651
 2026-11-20,11:59:34,Mark Johns,HOT DRUM (Original Mix),1795197574695
 2026-11-20,12:00:14,Michael Gray,The Weekend,1795197614231
@@ -299,58 +292,39 @@ fecha,hora,artista,titulo,ts
 2026-11-20,13:49:05,Disco Lines,Got To Do (Extended Mix),1795204145639
 2026-11-20,13:53:04,Outwork (Feat. Mr. Gee),Elektro (Original Mix),1795204384711
 2026-11-20,14:00:15,Happy Clappers,I Believe,1795204815848
-2026-11-20,14:03:57,,-,1795205037559
 2026-11-20,14:04:19,James Hype (Feat. Tita Lau),More Of The Same (Extended Mix),1795205059492
 2026-11-20,14:26:01,"Tiesto, Julie Thompson, Allure",Somewhere Inside (Vocal Radio Edit),1795206361547
-2026-11-20,14:30:10,,FRASE ESCUCHAS (RANDOM Buddies)-01,1795206610330
 2026-11-20,14:30:19,"Mark Knight, DJ PP, James Hurr",Miami Vice (Extended Mix),1795206619495
-2026-11-20,14:36:33,,FRASE ESCUCHAS (RANDOM Buddies)-02,1795206993379
 2026-11-20,14:36:40,"Bob Marley & The Wailers, FISHER",Jamming (FISHER Rework),1795207000764
-2026-11-20,14:39:59,,FRASE PÉSIMO GUSTO (RANDOM Buddies),1795207199448
 2026-11-20,14:40:28,"Mark Knight, Green Velvet, Rene Amesz, Mark Knight, Rene Amesz, Curtis A. Jones, Mark Knight, Rene Amesz, Curtis A. Jones, Noizu",Live Stream (Noizu Extended Mix),1795207228115
 2026-11-20,14:45:45,"Mr. V, Fedde Le Grand",Back & Forth feat. Mr. V (Tony Romera 2025 Extended Rework),1795207545763
 2026-11-20,15:05:39,Daft Punk,One More Time (Original Mix),1795208739298
 2026-11-20,15:07:28,"Shakedown, Layton Giordani, Anyma (ofc)",At Night (Anyma x Layton Giordani Extended Remix),1795208848050
-2026-11-20,15:13:13,,FRASE RAVE-CTRL (ESCUCHAS),1795209193675
 2026-11-20,15:13:18,Tori Amos,Professional Widow (Armand's Star Trunk Funk Mix),1795209198282
-2026-11-20,15:17:02,,FRASE RAVE-CTRL (FIBRA ÓPTICA),1795209422794
 2026-11-20,15:17:09,Purple Disco Machine,Body Funk (Original Mix),1795209429163
 2026-11-20,15:17:25,Destructo & VOLAC,What I Got (Dirty) (Extended),1795209445440
-2026-11-20,15:24:32,,FRASE RAVE-CTRL (LA RED),1795209872731
 2026-11-20,15:24:51,"Chris Lake, Disclosure, Leven Kali",one2three (Extended Mix),1795209891876
 2026-11-20,15:48:52,"Shakedown, Layton Giordani, Anyma (ofc)",At Night (Anyma x Layton Giordani Extended Remix),1795211332619
-2026-11-20,15:53:26,,FRASE RAVE-CTRL (MÁS MÚSICA),1795211606754
 2026-11-20,15:53:33,"Justice, Gesaffelstein, Grand Theft Auto VI",Pusher (feat. Gesaffelstein) [From GTAVI: Original Score] (Original Mix),1795211613940
 2026-11-20,15:59:47,Tribal Man,Morning Light (Original Mix),1795211987855
-2026-11-20,16:00:32,,FRASE RAVE-CTRL (NO EXISTEN CLASES),1795212032258
 2026-11-20,16:00:46,"David Guetta, Raye, Hypaton",WHERE IS MY HUSBAND! (Extended Remix),1795212046383
-2026-11-20,16:06:15,,FRASE RAVE-CTRL (RADIO PARA TODOS),1795212375826
 2026-11-20,16:06:20,"Mark Knight, Junior Jack, James Hurr",Feelings (Extended Mix),1795212380256
-2026-11-20,16:11:55,,FRASE RAVE-CTRL (SOMOS FRECUENCIA),1795212715980
 2026-11-20,16:12:01,"Mr. V, Fedde Le Grand",Back & Forth feat. Mr. V (Tony Romera 2025 Extended Rework),1795212721843
 2026-11-20,16:32:14,"Chris Lake, Skrillex, ANITA B QUEEN",LA NOCHE  (Extended Mix),1795213934586
-2026-11-20,16:36:30,,FRASE ESCUCHAS (RANDOM Buddies)-03,1795214190355
 2026-11-20,16:36:39,"MORTEN, ARTBAT",Hollow (Feat. Bonn),1795214199862
-2026-11-20,16:41:53,,FRASE RAVE-CTRL (SOMOS FRECUENCIA),1795214513068
 2026-11-20,16:41:58,"Nava, Charlotte de Witte",Omid (feat. NAVA) (Original Mix),1795214518944
 2026-11-20,16:47:32,Robby East & Robbie Mendez,Heartfelt (Extended Mix),1795214852071
-2026-11-20,16:47:34,,FRASE RAVE-CTRL (NO EXISTEN CLASES),1795214854471
 2026-11-20,16:47:34,"Argy, Omnya",Aria (Extended Mix),1795214854828
-2026-11-20,16:52:48,,FRASE PÉSIMO GUSTO (RANDOM Buddies)-02,1795215168858
 2026-11-20,16:53:17,"DJ Snake, Major Lazer",Lean On feat. MØ (Original Mix),1795215197643
 2026-11-20,17:10:10,Dash Berlin,Till The Sky Falls Down (Extended Mix),1795216210305
-2026-11-20,17:18:39,,FRASE RAVE-CTRL (RADIO PARA TODOS),1795216719803
 2026-11-20,17:18:44,RÜFÜS DU SOL,Innerbloom (Original Mix),1795216724443
-2026-11-20,17:28:10,,FRASE RAVE-CTRL (MÁS MÚSICA),1795217290171
 2026-11-20,17:28:17,Moby,In This World (Boris Brejcha Extended Remix),1795217297338
-2026-11-20,17:35:49,,FRASE ESCUCHAS (RANDOM Buddies)-04,1795217749762
 2026-11-20,17:35:57,"Armin van Buuren, Mary Jensen",Go All Night (Extended Mix),1795217757115
 2026-11-20,17:44:41,"Boys Noize, Taube, Taichu",Shut It Down (Extended VIP Mix),1795218281994
 2026-11-20,17:51:55,Gigi D'agostino,L'Amour Toujours (Original Mix),1795218715362
 2026-11-20,17:56:15,Jay Vegas,Shakin' (Original Mix),1795218975919
 2026-11-20,17:58:20,Jl & Afterman,Should I stay or Should I Go (2020 Retouch),1795219100615
 2026-11-20,18:03:32,FISHER (OZ) & Shermanology,It's A Killa (Extended Mix),1795219412055
-2026-11-20,18:06:57,,-,1795219617880
 2026-11-20,18:07:20,Justice,Starting From Zero (feat. Michael McDonald) [From GTAVI Original Score],1795219640002
 2026-11-20,18:10:27,"Purple Disco Machine, Meek",Test My Luck (Original Mix),1795219827762
 2026-11-20,18:14:05,Don Diablo & Wax Motif x Natural Born Chillers,Rock The Funky Beat (Extended Mix),1795220045598
@@ -371,8 +345,6 @@ fecha,hora,artista,titulo,ts
 2026-11-20,19:53:24,HI-LO,The Answer (Oliver Heldens Extended Edit),1795226004248
 2026-11-20,19:59:02,Fragma,Toca's Miracle (Inpetto Rmx),1795226342487
 2026-11-20,20:00:00,Oscar Velázquez,Música Futura - 006,1795226400147
-2026-11-20,20:59:38,LibreTime,offline,1795229978471
-2026-11-20,21:00:02,Oscar Velázquez,Música Futura - 006,1795230002287
 2026-11-20,21:14:04,EMMANUEL,SENTIRME VIVO,1795230844871
 2026-11-20,21:30:04,Jeffry Fischman,Verte,1795231804696
 2026-11-20,21:34:24,DANIELA SPALLA,Lejos De La Ciudad,1795232064920
